@@ -148,12 +148,13 @@ describe('NuvemshopClient', () => {
       .mockResolvedValueOnce(makeResponse(429, { error: 'Rate limit' }));
 
     const client = new NuvemshopClient(makeConfig());
-    const promise = client.get('/products');
+    // Attach .catch() before advancing timers to avoid unhandled rejection warnings
+    const resultPromise = client.get('/products').catch((e: unknown) => e);
 
     // Advance through all retry delays: 1000 + 2000 + 4000 = 7000ms
     await vi.advanceTimersByTimeAsync(10_000);
 
-    const result = await promise.catch((e: unknown) => e);
+    const result = await resultPromise;
     expect(result).toMatchObject({ isError: true, code: 'RATE_LIMITED' });
     expect(fetchMock).toHaveBeenCalledTimes(4); // initial + 3 retries
   });
@@ -167,11 +168,12 @@ describe('NuvemshopClient', () => {
       .mockResolvedValueOnce(makeResponse(429, { error: 'Rate limit' }));
 
     const client = new NuvemshopClient(makeConfig());
-    const promise = client.post('/products', {});
+    // Attach .catch() before advancing timers to avoid unhandled rejection warnings
+    const resultPromise = client.post('/products', {}).catch((e: unknown) => e);
 
     await vi.advanceTimersByTimeAsync(10_000);
 
-    const result = await promise.catch((e: unknown) => e);
+    const result = await resultPromise;
     expect(result).toMatchObject({ isError: true, code: 'RATE_LIMITED' });
     expect(fetchMock).toHaveBeenCalledTimes(4);
   });
