@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 04-01-PLAN.md (release preparation)
-last_updated: "2026-03-14T08:36:43.132Z"
+stopped_at: Completed 04-03-PLAN.md (platform configuration)
+last_updated: "2026-03-14T08:52:00.857Z"
 last_activity: 2026-03-14 — Completed 01-02 NuvemshopClient plan
 progress:
   total_phases: 4
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 12
-  completed_plans: 11
+  completed_plans: 12
   percent: 67
 ---
 
@@ -96,6 +96,8 @@ Recent decisions affecting current work:
 - [Phase 04-release-and-ci-cd]: npm files whitelist explicit array excludes src/tests/.planning/ from tarball
 - [Phase 04-release-and-ci-cd]: develop/main branch strategy: develop for active dev, main triggers npm publish
 - [Phase 04-release-and-ci-cd]: pre-commit hook executable bit fixed (chmod +x) — was present but not executable
+- [Phase 04-release-and-ci-cd]: OIDC bootstrap solved by manual first publish: granular token used for 0.0.1, then deleted; all future publishes via OIDC with no long-lived tokens
+- [Phase 04-release-and-ci-cd]: GitHub environment named npm gates the release.yml OIDC flow; no secrets or protection rules needed
 
 ### Pending Todos
 
@@ -108,6 +110,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-14T08:36:43.129Z
-Stopped at: Completed 04-01-PLAN.md (release preparation)
+Last session: 2026-03-14T08:51:56.781Z
+Stopped at: Completed 04-03-PLAN.md (platform configuration)
 Resume file: None
