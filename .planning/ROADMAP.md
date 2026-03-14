@@ -50,10 +50,10 @@ Plans:
 **Plans**: 4 plans
 
 Plans:
-- [ ] 02-01-PLAN.md — Shared tool utilities, client PATCH fix, store info + category tools (STOR-01, CAT-01..05)
-- [ ] 02-02-PLAN.md — Product and variant tools (PROD-01..10)
-- [ ] 02-03-PLAN.md — Order tools (ORD-01..05)
-- [ ] 02-04-PLAN.md — Fulfillment tools (FULF-01..04)
+- [x] 02-01-PLAN.md — Shared tool utilities, client PATCH fix, store info + category tools (STOR-01, CAT-01..05)
+- [x] 02-02-PLAN.md — Product and variant tools (PROD-01..10)
+- [x] 02-03-PLAN.md — Order tools (ORD-01..05)
+- [x] 02-04-PLAN.md — Fulfillment tools (FULF-01..04)
 
 ### Phase 3: Customer and Marketing Tools
 **Goal**: A developer can manage customers and run basic marketing campaigns (coupons) through their AI assistant
@@ -62,11 +62,11 @@ Plans:
 **Success Criteria** (what must be TRUE):
   1. A developer can ask the AI to list, get, create, update, and delete customers and receive correct results
   2. A developer can ask the AI to list existing coupons and create a new coupon
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 03-01: Customer tools (CUST-01..05)
-- [ ] 03-02: Coupon tools (MKTG-01..02)
+- [ ] 03-01-PLAN.md — Customer tools: list, get, create, update, delete with confirm guard (CUST-01..05)
+- [ ] 03-02-PLAN.md — Coupon tools: list with filters, create with type/value validation (MKTG-01..02)
 
 ### Phase 4: Release and CI/CD
 **Goal**: The package is published to npm and protected by automated CI checks that prevent broken or insecure releases
