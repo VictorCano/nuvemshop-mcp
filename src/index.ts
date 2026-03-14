@@ -1,6 +1,9 @@
 #!/usr/bin/env node
 import { NuvemshopClient } from './client.js';
 import { createServer, startHttp, startStdio } from './server.js';
+import { registerFulfillmentTools } from './tools/fulfillment.js';
+import { registerOrderTools } from './tools/orders.js';
+import { registerProductTools } from './tools/products.js';
 import { registerStoreCategoryTools } from './tools/store-categories.js';
 
 const accessToken = process.env['USER_ACCESS_TOKEN'];
@@ -24,14 +27,9 @@ const server = createServer();
 
 // Register tool groups
 registerStoreCategoryTools(server, client);
-
-// Wire in Wave 2:
-// import { registerProductTools } from './tools/products.js';
-// import { registerOrderTools } from './tools/orders.js';
-// import { registerFulfillmentTools } from './tools/fulfillment.js';
-// registerProductTools(server, client);
-// registerOrderTools(server, client);
-// registerFulfillmentTools(server, client);
+registerProductTools(server, client);
+registerOrderTools(server, client);
+registerFulfillmentTools(server, client);
 
 const useHttp = process.argv.includes('--http');
 

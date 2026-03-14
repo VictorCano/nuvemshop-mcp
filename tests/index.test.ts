@@ -21,6 +21,16 @@ vi.mock('../src/tools/store-categories.js', () => ({
   registerStoreCategoryTools: vi.fn(),
 }));
 
+// Mock the fulfillment tools so they don't call real methods on the mock server
+vi.mock('../src/tools/fulfillment.js', () => ({
+  registerFulfillmentTools: vi.fn(),
+}));
+
+// Mock the order tools so they don't call real methods on the mock server
+vi.mock('../src/tools/orders.js', () => ({
+  registerOrderTools: vi.fn(),
+}));
+
 function runIndex(env: Record<string, string | undefined>, args: string[] = []): Promise<void> {
   // Set up env and args
   const savedEnv: Record<string, string | undefined> = {};
