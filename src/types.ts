@@ -14,7 +14,7 @@ export class NuvemshopMcpError extends Error {
     resource?: string;
     retryHint?: string;
   }) {
-    super(opts.message);
+    super(opts.detail ? `${opts.message}: ${opts.detail}` : opts.message);
     this.name = 'NuvemshopMcpError';
     this.code = opts.code;
     this.detail = opts.detail;

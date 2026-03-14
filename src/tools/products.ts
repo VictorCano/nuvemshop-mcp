@@ -1,7 +1,13 @@
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { z } from 'zod';
 import type { NuvemshopClient } from '../client.js';
-import { buildQueryString, flattenI18n, toolResponse, wrapPaginated } from './utils.js';
+import {
+  buildQueryString,
+  flattenI18n,
+  jsonPreprocess,
+  toolResponse,
+  wrapPaginated,
+} from './utils.js';
 
 interface VariantResource {
   id: number;
@@ -173,18 +179,24 @@ export function registerProductTools(server: McpServer, client: NuvemshopClient)
         .optional()
         .describe('Whether product is visible in store (default true)'),
       price: z.string().optional().describe('Base price as string, e.g. "29.99"'),
-      variants: z
-        .array(z.record(z.unknown()))
-        .optional()
-        .describe('Array of variant objects to create along with the product'),
-      categories: z
-        .array(z.object({ id: z.number().int() }))
-        .optional()
-        .describe('Category assignments, e.g. [{"id": 5}]'),
-      images: z
-        .array(z.record(z.unknown()))
-        .optional()
-        .describe('Image objects to attach to the product'),
+      variants: z.preprocess(
+        jsonPreprocess,
+        z
+          .array(z.record(z.unknown()))
+          .optional()
+          .describe('Array of variant objects to create along with the product'),
+      ),
+      categories: z.preprocess(
+        jsonPreprocess,
+        z.array(z.number().int()).optional().describe('Category IDs to assign, e.g. [123, 456]'),
+      ),
+      images: z.preprocess(
+        jsonPreprocess,
+        z
+          .array(z.record(z.unknown()))
+          .optional()
+          .describe('Image objects to attach to the product'),
+      ),
     },
     async (args) => {
       const { name, description, published, price, variants, categories, images } = args as {
@@ -193,7 +205,7 @@ export function registerProductTools(server: McpServer, client: NuvemshopClient)
         published?: boolean;
         price?: string;
         variants?: Record<string, unknown>[];
-        categories?: { id: number }[];
+        categories?: number[];
         images?: Record<string, unknown>[];
       };
       const body: Record<string, unknown> = { name };
@@ -221,19 +233,27 @@ export function registerProductTools(server: McpServer, client: NuvemshopClient)
       description: z.string().optional().describe('New product description'),
       published: z.boolean().optional().describe('Published status'),
       price: z.string().optional().describe('New base price as string'),
-      categories: z
-        .array(z.object({ id: z.number().int() }))
-        .optional()
-        .describe('New category assignments'),
+      categories: z.preprocess(
+        jsonPreprocess,
+        z.array(z.number().int()).optional().describe('New category IDs, e.g. [123, 456]'),
+      ),
+      images: z.preprocess(
+        jsonPreprocess,
+        z
+          .array(z.record(z.unknown()))
+          .optional()
+          .describe('Image objects to attach, e.g. [{"src": "https://..."}]'),
+      ),
     },
     async (args) => {
-      const { id, name, description, published, price, categories } = args as {
+      const { id, name, description, published, price, categories, images } = args as {
         id: string;
         name?: string;
         description?: string;
         published?: boolean;
         price?: string;
-        categories?: { id: number }[];
+        categories?: number[];
+        images?: Record<string, unknown>[];
       };
       const body: Record<string, unknown> = {};
       if (name !== undefined) body['name'] = name;
@@ -241,6 +261,7 @@ export function registerProductTools(server: McpServer, client: NuvemshopClient)
       if (published !== undefined) body['published'] = published;
       if (price !== undefined) body['price'] = price;
       if (categories !== undefined) body['categories'] = categories;
+      if (images !== undefined) body['images'] = images;
       const data = await client.put(`/products/${id}`, body);
       return toolResponse(data);
     },
@@ -295,10 +316,13 @@ export function registerProductTools(server: McpServer, client: NuvemshopClient)
     {
       product_id: z.string().describe('Product ID to add the variant to'),
       price: z.string().describe('Variant price as string, e.g. "29.99"'),
-      values: z
-        .array(z.record(z.unknown()))
-        .optional()
-        .describe('Attribute values that define this variant, e.g. [{"id": 1, "es": "Rojo"}]'),
+      values: z.preprocess(
+        jsonPreprocess,
+        z
+          .array(z.record(z.unknown()))
+          .optional()
+          .describe('Attribute values that define this variant, e.g. [{"id": 1, "es": "Rojo"}]'),
+      ),
       sku: z.string().optional().describe('Stock keeping unit identifier'),
       stock: z.number().int().optional().describe('Initial stock quantity'),
       weight: z.string().optional().describe('Variant weight for shipping calculations'),
@@ -415,31 +439,34 @@ export function registerProductTools(server: McpServer, client: NuvemshopClient)
       'Each entry specifies a product ID and the variants to update. ' +
       'Use this for efficient batch operations instead of individual update_variant calls.',
     {
-      products: z
-        .array(
-          z.object({
-            id: z.number().int().describe('Product ID'),
-            variants: z
-              .array(
-                z.object({
-                  id: z.number().int().describe('Variant ID'),
-                  price: z.string().optional().describe('New price as string'),
-                  inventory_levels: z
-                    .array(
-                      z.object({
-                        stock: z.number().int().describe('New stock quantity'),
-                      }),
-                    )
-                    .optional()
-                    .describe('Inventory level updates'),
-                }),
-              )
-              .describe('Variants to update'),
-          }),
-        )
-        .min(1)
-        .max(50)
-        .describe('Array of product+variant update objects (1–50 items)'),
+      products: z.preprocess(
+        jsonPreprocess,
+        z
+          .array(
+            z.object({
+              id: z.number().int().describe('Product ID'),
+              variants: z
+                .array(
+                  z.object({
+                    id: z.number().int().describe('Variant ID'),
+                    price: z.string().optional().describe('New price as string'),
+                    inventory_levels: z
+                      .array(
+                        z.object({
+                          stock: z.number().int().describe('New stock quantity'),
+                        }),
+                      )
+                      .optional()
+                      .describe('Inventory level updates'),
+                  }),
+                )
+                .describe('Variants to update'),
+            }),
+          )
+          .min(1)
+          .max(50)
+          .describe('Array of product+variant update objects (1–50 items)'),
+      ),
     },
     async (args) => {
       const { products } = args as {

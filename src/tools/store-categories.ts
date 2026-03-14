@@ -140,7 +140,14 @@ export function registerStoreCategoryTools(server: McpServer, client: NuvemshopC
       if (name !== undefined) body['name'] = name;
       if (description !== undefined) body['description'] = description;
       if (parent !== undefined) body['parent'] = parent;
-      const data = await client.put(`/categories/${id}`, body);
+      // Nuvemshop categories API only supports PUT (full replace).
+      // Fetch current values and merge to avoid clearing unset fields.
+      const current = await client.get<CategoryResource>(`/categories/${id}`);
+      const merged: Record<string, unknown> = {};
+      merged['name'] = name ?? current.name;
+      merged['description'] = description ?? (current as Record<string, unknown>)['description'];
+      if (parent !== undefined) merged['parent'] = parent;
+      const data = await client.put(`/categories/${id}`, merged);
       return toolResponse(data);
     },
   );
