@@ -18,16 +18,16 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Products
 
-- [ ] **PROD-01**: User can list products with filtering and pagination
-- [ ] **PROD-02**: User can get a product by ID
-- [ ] **PROD-03**: User can get a product by SKU
-- [ ] **PROD-04**: User can create a product
-- [ ] **PROD-05**: User can update a product
-- [ ] **PROD-06**: User can delete a product
-- [ ] **PROD-07**: User can create a variant for a product
-- [ ] **PROD-08**: User can update a variant
-- [ ] **PROD-09**: User can delete a variant
-- [ ] **PROD-10**: User can bulk update stock and prices for up to 50 variants
+- [x] **PROD-01**: User can list products with filtering and pagination
+- [x] **PROD-02**: User can get a product by ID
+- [x] **PROD-03**: User can get a product by SKU
+- [x] **PROD-04**: User can create a product
+- [x] **PROD-05**: User can update a product
+- [x] **PROD-06**: User can delete a product
+- [x] **PROD-07**: User can create a variant for a product
+- [x] **PROD-08**: User can update a variant
+- [x] **PROD-09**: User can delete a variant
+- [x] **PROD-10**: User can bulk update stock and prices for up to 50 variants
 
 ### Categories
 
@@ -127,16 +127,16 @@ Which phases cover which requirements. Updated during roadmap creation.
 | FOUND-04 | Phase 1 | Complete |
 | FOUND-05 | Phase 1 | Complete |
 | FOUND-06 | Phase 1 | Complete |
-| PROD-01 | Phase 2 | Pending |
-| PROD-02 | Phase 2 | Pending |
-| PROD-03 | Phase 2 | Pending |
-| PROD-04 | Phase 2 | Pending |
-| PROD-05 | Phase 2 | Pending |
-| PROD-06 | Phase 2 | Pending |
-| PROD-07 | Phase 2 | Pending |
-| PROD-08 | Phase 2 | Pending |
-| PROD-09 | Phase 2 | Pending |
-| PROD-10 | Phase 2 | Pending |
+| PROD-01 | Phase 2 | Complete |
+| PROD-02 | Phase 2 | Complete |
+| PROD-03 | Phase 2 | Complete |
+| PROD-04 | Phase 2 | Complete |
+| PROD-05 | Phase 2 | Complete |
+| PROD-06 | Phase 2 | Complete |
+| PROD-07 | Phase 2 | Complete |
+| PROD-08 | Phase 2 | Complete |
+| PROD-09 | Phase 2 | Complete |
+| PROD-10 | Phase 2 | Complete |
 | CAT-01 | Phase 2 | Complete |
 | CAT-02 | Phase 2 | Complete |
 | CAT-03 | Phase 2 | Complete |
