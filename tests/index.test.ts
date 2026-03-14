@@ -41,6 +41,11 @@ vi.mock('../src/tools/coupons.js', () => ({
   registerCouponTools: vi.fn(),
 }));
 
+// Mock the customer tools so they don't call real methods on the mock server
+vi.mock('../src/tools/customers.js', () => ({
+  registerCustomerTools: vi.fn(),
+}));
+
 function runIndex(env: Record<string, string | undefined>, args: string[] = []): Promise<void> {
   // Set up env and args
   const savedEnv: Record<string, string | undefined> = {};
