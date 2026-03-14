@@ -176,11 +176,7 @@ describe('registerFulfillmentTools', () => {
       const handler = getHandler(server, 'add_tracking_event');
       await handler({ order_id: 42, fulfillment_order_id: 5, status: 'delivered' });
 
-      const [, , body] = vi.mocked(client.post).mock.calls[0] as [
-        string,
-        string,
-        Record<string, unknown>,
-      ];
+      const [, body] = vi.mocked(client.post).mock.calls[0] as [string, Record<string, unknown>];
       expect(body).toEqual({ status: 'delivered' });
     });
   });
