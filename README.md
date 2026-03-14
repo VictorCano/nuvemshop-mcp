@@ -10,17 +10,17 @@ Servidor MCP para a API de e-commerce Nuvemshop/Tiendanube.
 - Node.js >= 18
 - Uma loja Nuvemshop com token de acesso
 
-## Instalacao
+## Instalação
 
 ```bash
 npm install nuvemshop-mcp
 ```
 
-## Configuracao
+## Configuração
 
 ### Claude Desktop
 
-Adicione ao arquivo de configuracao do Claude Desktop (`claude_desktop_config.json`):
+Adicione ao arquivo de configuração do Claude Desktop (`claude_desktop_config.json`):
 
 ```json
 {
@@ -39,25 +39,25 @@ Adicione ao arquivo de configuracao do Claude Desktop (`claude_desktop_config.js
 
 ### Transporte HTTP
 
-Para usar o transporte HTTP (compativel com a especificacao MCP mais recente):
+Para usar o transporte HTTP (compatível com a especificação MCP mais recente):
 
 ```bash
 npx nuvemshop-mcp --http
 ```
 
-Inicia na porta 3000 por padrao. Configuravel com as variaveis de ambiente `MCP_HTTP_HOST` e `MCP_HTTP_PORT`.
+Inicia na porta 3000 por padrão. Configurável com as variáveis de ambiente `MCP_HTTP_HOST` e `MCP_HTTP_PORT`.
 
-## Ferramentas Disponiveis
+## Ferramentas Disponíveis
 
 ### Loja (1)
 
-| Ferramenta  | Descricao                                        |
+| Ferramenta  | Descrição                                        |
 | ----------- | ------------------------------------------------ |
-| `get_store` | Retorna informacoes da loja (plano, nome, moeda) |
+| `get_store` | Retorna informações da loja (plano, nome, moeda) |
 
 ### Categorias (5)
 
-| Ferramenta        | Descricao                        |
+| Ferramenta        | Descrição                        |
 | ----------------- | -------------------------------- |
 | `list_categories` | Lista todas as categorias        |
 | `get_category`    | Busca uma categoria por ID       |
@@ -67,7 +67,7 @@ Inicia na porta 3000 por padrao. Configuravel com as variaveis de ambiente `MCP_
 
 ### Produtos (10)
 
-| Ferramenta                | Descricao                                       |
+| Ferramenta                | Descrição                                       |
 | ------------------------- | ----------------------------------------------- |
 | `list_products`           | Lista produtos com filtros opcionais            |
 | `get_product`             | Busca um produto por ID                         |
@@ -78,11 +78,11 @@ Inicia na porta 3000 por padrao. Configuravel com as variaveis de ambiente `MCP_
 | `create_variant`          | Adiciona uma variante a um produto              |
 | `update_variant`          | Atualiza uma variante existente                 |
 | `delete_variant`          | Remove uma variante                             |
-| `bulk_update_stock_price` | Atualiza estoque e preco de multiplas variantes |
+| `bulk_update_stock_price` | Atualiza estoque e preço de múltiplas variantes |
 
 ### Pedidos (5)
 
-| Ferramenta     | Descricao                           |
+| Ferramenta     | Descrição                           |
 | -------------- | ----------------------------------- |
 | `list_orders`  | Lista pedidos com filtros opcionais |
 | `get_order`    | Busca um pedido por ID              |
@@ -92,7 +92,7 @@ Inicia na porta 3000 por padrao. Configuravel com as variaveis de ambiente `MCP_
 
 ### Fulfillment (4)
 
-| Ferramenta                 | Descricao                                     |
+| Ferramenta                 | Descrição                                     |
 | -------------------------- | --------------------------------------------- |
 | `list_fulfillment_orders`  | Lista ordens de fulfillment de um pedido      |
 | `get_fulfillment_order`    | Busca uma ordem de fulfillment por ID         |
@@ -101,7 +101,7 @@ Inicia na porta 3000 por padrao. Configuravel com as variaveis de ambiente `MCP_
 
 ### Clientes (5)
 
-| Ferramenta        | Descricao                            |
+| Ferramenta        | Descrição                            |
 | ----------------- | ------------------------------------ |
 | `list_customers`  | Lista clientes com filtros opcionais |
 | `get_customer`    | Busca um cliente por ID              |
@@ -111,7 +111,7 @@ Inicia na porta 3000 por padrao. Configuravel com as variaveis de ambiente `MCP_
 
 ### Cupons (2)
 
-| Ferramenta      | Descricao                      |
+| Ferramenta      | Descrição                      |
 | --------------- | ------------------------------ |
 | `list_coupons`  | Lista cupons de desconto       |
 | `create_coupon` | Cria um novo cupom de desconto |
@@ -127,16 +127,16 @@ Alguns exemplos de prompts para usar com seu assistente de IA:
 
 ## Tecnologia
 
-Construido com `@modelcontextprotocol/sdk`.
+Construído com `@modelcontextprotocol/sdk`.
 
 ## Contribuindo
 
-O desenvolvimento acontece no branch `develop`. Releases sao feitas via PR para `main`. Merge em `main` publica automaticamente no npm via GitHub Actions. Para contribuir, crie seu branch a partir de `develop` e abra um PR para `develop`.
+O desenvolvimento acontece no branch `develop`. Releases são feitas via PR para `main`. Merge em `main` publica automaticamente no npm via GitHub Actions. Para contribuir, crie seu branch a partir de `develop` e abra um PR para `develop`.
 
-## Licenca
+## Licença
 
 MIT
 
 ---
 
-Este projeto foi em sua maior parte (~90%) construido com assistencia de IA.
+Este projeto foi em sua maior parte (~90%) construído com assistência de IA.
