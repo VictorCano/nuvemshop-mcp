@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 02-01 store-categories plan
-last_updated: "2026-03-14T07:30:43.647Z"
+stopped_at: Completed 02-02 products plan
+last_updated: "2026-03-14T07:35:47.745Z"
 last_activity: 2026-03-14 — Completed 01-02 NuvemshopClient plan
 progress:
   total_phases: 4
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 7
-  completed_plans: 4
+  completed_plans: 7
   percent: 67
 ---
 
@@ -52,6 +52,9 @@ Progress: [███████░░░] 67%
 *Updated after each plan completion*
 | Phase 01-foundation P01-03 | 3 | 2 tasks | 4 files |
 | Phase 02-core-commerce-tools P01 | 5 | 2 tasks | 7 files |
+| Phase 02-core-commerce-tools P04 | 2 | 1 tasks | 4 files |
+| Phase 02-core-commerce-tools P03 | 2 | 1 tasks | 4 files |
+| Phase 02-core-commerce-tools P02 | 3 min | 1 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -74,6 +77,12 @@ Recent decisions affecting current work:
 - [Phase 02-core-commerce-tools]: flattenI18n returns first non-empty value from i18n object preserving key order
 - [Phase 02-core-commerce-tools]: delete_category confirm guard: fetches resource first when confirm not set, returns warning with name
 - [Phase 02-core-commerce-tools]: Wave 2 tool registrations commented out in index.ts with Wire in Wave 2 marker
+- [Phase 02-core-commerce-tools]: update_fulfillment_order uses Zod enum for 5 valid statuses; DELIVERED guided toward add_tracking_event
+- [Phase 02-core-commerce-tools]: add_tracking_event body only includes defined fields; optional city/province/country/happened_at omitted when absent
+- [Phase 02-core-commerce-tools]: cancel_order confirm guard: no confirm fetches order to show number, status, and total in warning
+- [Phase 02-core-commerce-tools]: list_orders returns curated shape to reduce payload; close/reopen have no confirm guard since reversible
+- [Phase 02-core-commerce-tools]: list_products curates fields (id, flattened name, variant_count, price_range, sku) for AI-friendly summaries
+- [Phase 02-core-commerce-tools]: bulk_update_stock_price adds runtime 1-50 item validation in handler alongside Zod schema
 
 ### Pending Todos
 
@@ -86,6 +95,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-14T07:30:43.644Z
-Stopped at: Completed 02-01 store-categories plan
+Last session: 2026-03-14T07:35:47.743Z
+Stopped at: Completed 02-02 products plan
 Resume file: None

@@ -39,18 +39,18 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Orders
 
-- [ ] **ORD-01**: User can list orders with filtering and pagination
-- [ ] **ORD-02**: User can get an order by ID
-- [ ] **ORD-03**: User can close an order
-- [ ] **ORD-04**: User can reopen an order
-- [ ] **ORD-05**: User can cancel an order
+- [x] **ORD-01**: User can list orders with filtering and pagination
+- [x] **ORD-02**: User can get an order by ID
+- [x] **ORD-03**: User can close an order
+- [x] **ORD-04**: User can reopen an order
+- [x] **ORD-05**: User can cancel an order
 
 ### Fulfillment
 
-- [ ] **FULF-01**: User can list fulfillment orders for an order
-- [ ] **FULF-02**: User can get a fulfillment order by ID
-- [ ] **FULF-03**: User can update fulfillment order status
-- [ ] **FULF-04**: User can add tracking events to a fulfillment order
+- [x] **FULF-01**: User can list fulfillment orders for an order
+- [x] **FULF-02**: User can get a fulfillment order by ID
+- [x] **FULF-03**: User can update fulfillment order status
+- [x] **FULF-04**: User can add tracking events to a fulfillment order
 
 ### Customers
 
@@ -142,15 +142,15 @@ Which phases cover which requirements. Updated during roadmap creation.
 | CAT-03 | Phase 2 | Complete |
 | CAT-04 | Phase 2 | Complete |
 | CAT-05 | Phase 2 | Complete |
-| ORD-01 | Phase 2 | Pending |
-| ORD-02 | Phase 2 | Pending |
-| ORD-03 | Phase 2 | Pending |
-| ORD-04 | Phase 2 | Pending |
-| ORD-05 | Phase 2 | Pending |
-| FULF-01 | Phase 2 | Pending |
-| FULF-02 | Phase 2 | Pending |
-| FULF-03 | Phase 2 | Pending |
-| FULF-04 | Phase 2 | Pending |
+| ORD-01 | Phase 2 | Complete |
+| ORD-02 | Phase 2 | Complete |
+| ORD-03 | Phase 2 | Complete |
+| ORD-04 | Phase 2 | Complete |
+| ORD-05 | Phase 2 | Complete |
+| FULF-01 | Phase 2 | Complete |
+| FULF-02 | Phase 2 | Complete |
+| FULF-03 | Phase 2 | Complete |
+| FULF-04 | Phase 2 | Complete |
 | STOR-01 | Phase 2 | Complete |
 | CUST-01 | Phase 3 | Pending |
 | CUST-02 | Phase 3 | Pending |

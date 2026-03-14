@@ -13,7 +13,7 @@ Build a TypeScript MCP server that wraps the Nuvemshop/Tiendanube e-commerce API
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundation** - Secure MCP skeleton with auth, dual transports, error handling, and dev tooling (completed 2026-03-14)
-- [ ] **Phase 2: Core Commerce Tools** - Product, category, order, fulfillment, and store tools
+- [x] **Phase 2: Core Commerce Tools** - Product, category, order, fulfillment, and store tools (completed 2026-03-14)
 - [ ] **Phase 3: Customer and Marketing Tools** - Customer CRUD and coupon tools
 - [ ] **Phase 4: Release and CI/CD** - npm package, GitHub Actions, and Portuguese README
 
@@ -93,6 +93,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 3/3 | Complete   | 2026-03-14 |
-| 2. Core Commerce Tools | 1/4 | In Progress|  |
+| 2. Core Commerce Tools | 4/4 | Complete   | 2026-03-14 |
 | 3. Customer and Marketing Tools | 0/2 | Not started | - |
 | 4. Release and CI/CD | 0/3 | Not started | - |
