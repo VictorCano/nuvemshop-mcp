@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 
 // Mock the server module
 vi.mock('../src/server.js', () => ({
-  createServer: vi.fn().mockReturnValue({ name: 'nuvemshop-mcp' }),
+  createServer: vi.fn().mockReturnValue({ name: 'nuvemshop-mcp', tool: vi.fn() }),
   startStdio: vi.fn().mockResolvedValue(undefined),
   startHttp: vi.fn().mockResolvedValue(undefined),
 }));
@@ -14,6 +14,11 @@ vi.mock('../src/logger.js', () => ({
     error: vi.fn(),
     debug: vi.fn(),
   },
+}));
+
+// Mock the store-categories tools so they don't call real methods on the mock server
+vi.mock('../src/tools/store-categories.js', () => ({
+  registerStoreCategoryTools: vi.fn(),
 }));
 
 function runIndex(env: Record<string, string | undefined>, args: string[] = []): Promise<void> {
