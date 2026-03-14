@@ -57,6 +57,21 @@ export function flattenI18n(field: Record<string, string> | string | null | unde
 }
 
 /**
+ * Preprocesses a value that may be a JSON string into a parsed value.
+ * Some MCP transports serialize complex params (arrays/objects) as JSON strings.
+ */
+export function jsonPreprocess(val: unknown): unknown {
+  if (typeof val === 'string') {
+    try {
+      return JSON.parse(val);
+    } catch {
+      return val;
+    }
+  }
+  return val;
+}
+
+/**
  * Wraps data in the standard MCP tool return format.
  */
 export function toolResponse(data: unknown): { content: [{ type: 'text'; text: string }] } {
