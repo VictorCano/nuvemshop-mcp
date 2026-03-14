@@ -21,6 +21,7 @@ function makeClient(): NuvemshopClient {
     put: vi.fn(),
     del: vi.fn(),
     request: vi.fn(),
+    requestList: vi.fn(),
     list: vi.fn(),
   } as unknown as NuvemshopClient;
 }

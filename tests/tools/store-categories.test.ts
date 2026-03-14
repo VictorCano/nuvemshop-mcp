@@ -21,6 +21,7 @@ function makeClient(): NuvemshopClient {
     put: vi.fn(),
     del: vi.fn(),
     request: vi.fn(),
+    requestList: vi.fn(),
     list: vi.fn(),
   } as unknown as NuvemshopClient;
 }
@@ -78,7 +79,7 @@ describe('registerStoreCategoryTools', () => {
   });
 
   describe('list_categories', () => {
-    it('calls client.request with GET and query params, returns wrapPaginated result', async () => {
+    it('calls client.requestList with GET and query params, returns wrapPaginated result', async () => {
       const server = makeServer();
       const client = makeClient();
       registerStoreCategoryTools(server as never, client);
@@ -87,12 +88,15 @@ describe('registerStoreCategoryTools', () => {
         { id: 1, name: { pt: 'Roupas', en: 'Clothes' }, parent_id: null },
         { id: 2, name: { pt: 'Calçados', en: 'Shoes' }, parent_id: null },
       ];
-      vi.mocked(client.request).mockResolvedValueOnce(categories);
+      vi.mocked(client.requestList).mockResolvedValueOnce(categories);
 
       const handler = getHandler(server, 'list_categories');
       const result = await handler({ page: 1, per_page: 20 });
 
-      expect(client.request).toHaveBeenCalledWith('GET', expect.stringContaining('/categories'));
+      expect(client.requestList).toHaveBeenCalledWith(
+        'GET',
+        expect.stringContaining('/categories'),
+      );
       const parsed = JSON.parse(result.content[0].text);
       expect(parsed.pagination.page).toBe(1);
       expect(parsed.pagination.per_page).toBe(20);
@@ -107,12 +111,12 @@ describe('registerStoreCategoryTools', () => {
       const client = makeClient();
       registerStoreCategoryTools(server as never, client);
 
-      vi.mocked(client.request).mockResolvedValueOnce([]);
+      vi.mocked(client.requestList).mockResolvedValueOnce([]);
 
       const handler = getHandler(server, 'list_categories');
       await handler({ page: 1, per_page: 20, parent_id: 5 });
 
-      const [, path] = vi.mocked(client.request).mock.calls[0] as [string, string];
+      const [, path] = vi.mocked(client.requestList).mock.calls[0] as [string, string];
       expect(path).toContain('parent_id=5');
     });
   });

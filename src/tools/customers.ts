@@ -96,7 +96,7 @@ export function registerCustomerTools(server: McpServer, client: NuvemshopClient
         created_at_max,
         since_id,
       });
-      const raw = await client.request<CustomerResource[]>('GET', `/customers${qs}`);
+      const raw = await client.requestList<CustomerResource>('GET', `/customers${qs}`);
       const items = raw.map(curateCustomer);
       return toolResponse(wrapPaginated(items, page, per_page));
     },

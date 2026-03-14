@@ -1,4 +1,5 @@
 .planning/
+.mcp.json
 dev/
 node_modules/
 dist/

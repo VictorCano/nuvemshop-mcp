@@ -55,7 +55,7 @@ export function registerStoreCategoryTools(server: McpServer, client: NuvemshopC
         parent_id?: number;
       };
       const qs = buildQueryString({ page, per_page, parent_id });
-      const raw = await client.request<CategoryResource[]>('GET', `/categories${qs}`);
+      const raw = await client.requestList<CategoryResource>('GET', `/categories${qs}`);
       const items = raw.map((cat) => ({
         ...cat,
         name: flattenI18n(cat.name as Record<string, string>),

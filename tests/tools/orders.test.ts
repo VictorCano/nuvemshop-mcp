@@ -21,6 +21,7 @@ function makeClient(): NuvemshopClient {
     put: vi.fn(),
     del: vi.fn(),
     request: vi.fn(),
+    requestList: vi.fn(),
     list: vi.fn(),
   } as unknown as NuvemshopClient;
 }
@@ -83,12 +84,12 @@ describe('registerOrderTools', () => {
           extra_field: 'should_be_dropped',
         },
       ];
-      vi.mocked(client.request).mockResolvedValueOnce(rawOrders);
+      vi.mocked(client.requestList).mockResolvedValueOnce(rawOrders);
 
       const handler = getHandler(server, 'list_orders');
       const result = await handler({ page: 1, per_page: 20 });
 
-      expect(client.request).toHaveBeenCalledWith('GET', expect.stringContaining('/orders'));
+      expect(client.requestList).toHaveBeenCalledWith('GET', expect.stringContaining('/orders'));
       const parsed = JSON.parse(result.content[0].text);
       expect(parsed.pagination.page).toBe(1);
       expect(parsed.pagination.per_page).toBe(20);
@@ -116,12 +117,12 @@ describe('registerOrderTools', () => {
       const client = makeClient();
       registerOrderTools(server as never, client);
 
-      vi.mocked(client.request).mockResolvedValueOnce([]);
+      vi.mocked(client.requestList).mockResolvedValueOnce([]);
 
       const handler = getHandler(server, 'list_orders');
       await handler({ page: 1, per_page: 20, status: 'open' });
 
-      const [, path] = vi.mocked(client.request).mock.calls[0] as [string, string];
+      const [, path] = vi.mocked(client.requestList).mock.calls[0] as [string, string];
       expect(path).toContain('status=open');
     });
 
@@ -130,12 +131,12 @@ describe('registerOrderTools', () => {
       const client = makeClient();
       registerOrderTools(server as never, client);
 
-      vi.mocked(client.request).mockResolvedValueOnce([]);
+      vi.mocked(client.requestList).mockResolvedValueOnce([]);
 
       const handler = getHandler(server, 'list_orders');
       await handler({ page: 1, per_page: 20, payment_status: 'paid' });
 
-      const [, path] = vi.mocked(client.request).mock.calls[0] as [string, string];
+      const [, path] = vi.mocked(client.requestList).mock.calls[0] as [string, string];
       expect(path).toContain('payment_status=paid');
     });
 
@@ -144,12 +145,12 @@ describe('registerOrderTools', () => {
       const client = makeClient();
       registerOrderTools(server as never, client);
 
-      vi.mocked(client.request).mockResolvedValueOnce([]);
+      vi.mocked(client.requestList).mockResolvedValueOnce([]);
 
       const handler = getHandler(server, 'list_orders');
       await handler({ page: 1, per_page: 20, shipping_status: 'shipped' });
 
-      const [, path] = vi.mocked(client.request).mock.calls[0] as [string, string];
+      const [, path] = vi.mocked(client.requestList).mock.calls[0] as [string, string];
       expect(path).toContain('shipping_status=shipped');
     });
 
@@ -158,12 +159,12 @@ describe('registerOrderTools', () => {
       const client = makeClient();
       registerOrderTools(server as never, client);
 
-      vi.mocked(client.request).mockResolvedValueOnce([]);
+      vi.mocked(client.requestList).mockResolvedValueOnce([]);
 
       const handler = getHandler(server, 'list_orders');
       await handler({ page: 1, per_page: 20, customer_id: 42 });
 
-      const [, path] = vi.mocked(client.request).mock.calls[0] as [string, string];
+      const [, path] = vi.mocked(client.requestList).mock.calls[0] as [string, string];
       expect(path).toContain('customer_id=42');
     });
 
@@ -172,7 +173,7 @@ describe('registerOrderTools', () => {
       const client = makeClient();
       registerOrderTools(server as never, client);
 
-      vi.mocked(client.request).mockResolvedValueOnce([]);
+      vi.mocked(client.requestList).mockResolvedValueOnce([]);
 
       const handler = getHandler(server, 'list_orders');
       await handler({
@@ -182,7 +183,7 @@ describe('registerOrderTools', () => {
         created_at_max: '2024-01-31T23:59:59Z',
       });
 
-      const [, path] = vi.mocked(client.request).mock.calls[0] as [string, string];
+      const [, path] = vi.mocked(client.requestList).mock.calls[0] as [string, string];
       expect(path).toContain('created_at_min=');
       expect(path).toContain('created_at_max=');
     });

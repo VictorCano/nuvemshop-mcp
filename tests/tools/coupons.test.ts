@@ -21,6 +21,7 @@ function makeClient(): NuvemshopClient {
     put: vi.fn(),
     del: vi.fn(),
     request: vi.fn(),
+    requestList: vi.fn(),
     list: vi.fn(),
   } as unknown as NuvemshopClient;
 }
@@ -49,7 +50,7 @@ describe('registerCouponTools', () => {
   });
 
   describe('list_coupons', () => {
-    it('calls client.request with GET and query params, returns curated wrapPaginated result', async () => {
+    it('calls client.requestList with GET and query params, returns curated wrapPaginated result', async () => {
       const server = makeServer();
       const client = makeClient();
       registerCouponTools(server as never, client);
@@ -82,12 +83,12 @@ describe('registerCouponTools', () => {
           extra_field: 'should_be_dropped',
         },
       ];
-      vi.mocked(client.request).mockResolvedValueOnce(rawCoupons);
+      vi.mocked(client.requestList).mockResolvedValueOnce(rawCoupons);
 
       const handler = getHandler(server, 'list_coupons');
       const result = await handler({ page: 1, per_page: 20 });
 
-      expect(client.request).toHaveBeenCalledWith('GET', expect.stringContaining('/coupons'));
+      expect(client.requestList).toHaveBeenCalledWith('GET', expect.stringContaining('/coupons'));
       const parsed = JSON.parse(result.content[0].text);
       expect(parsed.pagination.page).toBe(1);
       expect(parsed.pagination.per_page).toBe(20);
@@ -116,12 +117,12 @@ describe('registerCouponTools', () => {
       const client = makeClient();
       registerCouponTools(server as never, client);
 
-      vi.mocked(client.request).mockResolvedValueOnce([]);
+      vi.mocked(client.requestList).mockResolvedValueOnce([]);
 
       const handler = getHandler(server, 'list_coupons');
       await handler({ page: 1, per_page: 20, q: 'SAVE' });
 
-      const [, path] = vi.mocked(client.request).mock.calls[0] as [string, string];
+      const [, path] = vi.mocked(client.requestList).mock.calls[0] as [string, string];
       expect(path).toContain('q=SAVE');
     });
 
@@ -130,12 +131,12 @@ describe('registerCouponTools', () => {
       const client = makeClient();
       registerCouponTools(server as never, client);
 
-      vi.mocked(client.request).mockResolvedValueOnce([]);
+      vi.mocked(client.requestList).mockResolvedValueOnce([]);
 
       const handler = getHandler(server, 'list_coupons');
       await handler({ page: 1, per_page: 20, status: 'valid' });
 
-      const [, path] = vi.mocked(client.request).mock.calls[0] as [string, string];
+      const [, path] = vi.mocked(client.requestList).mock.calls[0] as [string, string];
       expect(path).toContain('status=valid');
     });
 
@@ -144,12 +145,12 @@ describe('registerCouponTools', () => {
       const client = makeClient();
       registerCouponTools(server as never, client);
 
-      vi.mocked(client.request).mockResolvedValueOnce([]);
+      vi.mocked(client.requestList).mockResolvedValueOnce([]);
 
       const handler = getHandler(server, 'list_coupons');
       await handler({ page: 1, per_page: 20, discount_type: 'percentage' });
 
-      const [, path] = vi.mocked(client.request).mock.calls[0] as [string, string];
+      const [, path] = vi.mocked(client.requestList).mock.calls[0] as [string, string];
       expect(path).toContain('discount_type=percentage');
     });
   });

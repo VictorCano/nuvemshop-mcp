@@ -119,7 +119,7 @@ export function registerCouponTools(server: McpServer, client: NuvemshopClient):
         created_at_max,
       });
 
-      const raw = await client.request<CouponResource[]>('GET', `/coupons${qs}`);
+      const raw = await client.requestList<CouponResource>('GET', `/coupons${qs}`);
       const items = raw.map(curateCoupon);
 
       return toolResponse(wrapPaginated(items, page, per_page));

@@ -94,7 +94,7 @@ export function registerProductTools(server: McpServer, client: NuvemshopClient)
         min_stock,
         max_stock,
       });
-      const raw = await client.request<ProductResource[]>('GET', `/products${qs}`);
+      const raw = await client.requestList<ProductResource>('GET', `/products${qs}`);
       const items = raw.map((product) => {
         const variants = product.variants ?? [];
         const prices = variants.map((v) => parseFloat(v.price)).filter((p) => !isNaN(p));
