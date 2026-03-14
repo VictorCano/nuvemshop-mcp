@@ -53,7 +53,10 @@ export class NuvemshopClient {
       'User-Agent': USER_AGENT,
     };
 
-    if (body !== undefined && (upperMethod === 'POST' || upperMethod === 'PUT')) {
+    if (
+      body !== undefined &&
+      (upperMethod === 'POST' || upperMethod === 'PUT' || upperMethod === 'PATCH')
+    ) {
       headers['Content-Type'] = 'application/json; charset=utf-8';
     }
 
