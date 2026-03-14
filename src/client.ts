@@ -1,6 +1,7 @@
 import { normalizeError } from './errors.js';
 import { logger } from './logger.js';
-import type { NuvemshopClientConfig, NuvemshopMcpError, PaginationParams } from './types.js';
+import { NuvemshopMcpError } from './types.js';
+import type { NuvemshopClientConfig, PaginationParams } from './types.js';
 
 const BASE_URL = 'https://api.nuvemshop.com.br/2025-03';
 const USER_AGENT = 'nuvemshop-mcp (https://github.com/VictorCano/nuvemshop-mcp)';
@@ -96,14 +97,12 @@ export class NuvemshopClient {
       }
 
       // Non-retryable or exhausted retries — normalize and throw
-      const error = await normalizeError(res, path);
-      throw error as NuvemshopMcpError;
+      throw await normalizeError(res, path);
     }
 
     // Should never reach here, but TypeScript needs this
     const finalRes = lastRes ?? new Response(null, { status: 500 });
-    const error = await normalizeError(finalRes, path);
-    throw error as NuvemshopMcpError;
+    throw await normalizeError(finalRes, path);
   }
 
   async list<T>(path: string, params?: PaginationParams): Promise<T> {
@@ -111,6 +110,20 @@ export class NuvemshopClient {
     const per_page = params?.per_page ?? 20;
     const qs = `?page=${page}&per_page=${per_page}`;
     return this.request<T>('GET', `${path}${qs}`);
+  }
+
+  /**
+   * Like request(), but returns an empty array on 404 (Nuvemshop returns 404 for empty pages).
+   */
+  async requestList<T>(method: string, path: string): Promise<T[]> {
+    try {
+      return await this.request<T[]>(method, path);
+    } catch (err) {
+      if (err instanceof NuvemshopMcpError && err.status === 404) {
+        return [];
+      }
+      throw err;
+    }
   }
 
   get<T>(path: string): Promise<T> {

@@ -1,4 +1,4 @@
-import type { NuvemshopMcpError } from './types.js';
+import { NuvemshopMcpError } from './types.js';
 
 function mapStatusToCode(status: number): string {
   switch (status) {
@@ -66,12 +66,12 @@ export async function normalizeError(res: Response, resource: string): Promise<N
     detail = res.statusText || `HTTP ${res.status}`;
   }
 
-  return {
-    isError: true,
+  return new NuvemshopMcpError({
     code,
     message,
     detail,
+    status: res.status,
     resource,
     retryHint,
-  };
+  });
 }

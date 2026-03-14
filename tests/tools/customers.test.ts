@@ -21,6 +21,7 @@ function makeClient(): NuvemshopClient {
     put: vi.fn(),
     del: vi.fn(),
     request: vi.fn(),
+    requestList: vi.fn(),
     list: vi.fn(),
   } as unknown as NuvemshopClient;
 }
@@ -52,7 +53,7 @@ describe('registerCustomerTools', () => {
   });
 
   describe('list_customers', () => {
-    it('calls client.request with GET and query params, returns curated wrapPaginated result', async () => {
+    it('calls client.requestList with GET and query params, returns curated wrapPaginated result', async () => {
       const server = makeServer();
       const client = makeClient();
       registerCustomerTools(server as never, client);
@@ -84,12 +85,12 @@ describe('registerCustomerTools', () => {
           extra_field: 'should_be_dropped',
         },
       ];
-      vi.mocked(client.request).mockResolvedValueOnce(rawCustomers);
+      vi.mocked(client.requestList).mockResolvedValueOnce(rawCustomers);
 
       const handler = getHandler(server, 'list_customers');
       const result = await handler({ page: 1, per_page: 20 });
 
-      expect(client.request).toHaveBeenCalledWith('GET', expect.stringContaining('/customers'));
+      expect(client.requestList).toHaveBeenCalledWith('GET', expect.stringContaining('/customers'));
       const parsed = JSON.parse(result.content[0].text);
       expect(parsed.pagination.page).toBe(1);
       expect(parsed.pagination.per_page).toBe(20);
@@ -122,12 +123,12 @@ describe('registerCustomerTools', () => {
       const client = makeClient();
       registerCustomerTools(server as never, client);
 
-      vi.mocked(client.request).mockResolvedValueOnce([]);
+      vi.mocked(client.requestList).mockResolvedValueOnce([]);
 
       const handler = getHandler(server, 'list_customers');
       await handler({ page: 1, per_page: 20, q: 'alice' });
 
-      const [, path] = vi.mocked(client.request).mock.calls[0] as [string, string];
+      const [, path] = vi.mocked(client.requestList).mock.calls[0] as [string, string];
       expect(path).toContain('q=alice');
     });
 
@@ -136,12 +137,12 @@ describe('registerCustomerTools', () => {
       const client = makeClient();
       registerCustomerTools(server as never, client);
 
-      vi.mocked(client.request).mockResolvedValueOnce([]);
+      vi.mocked(client.requestList).mockResolvedValueOnce([]);
 
       const handler = getHandler(server, 'list_customers');
       await handler({ page: 1, per_page: 20, email: 'alice@example.com' });
 
-      const [, path] = vi.mocked(client.request).mock.calls[0] as [string, string];
+      const [, path] = vi.mocked(client.requestList).mock.calls[0] as [string, string];
       expect(path).toContain('email=');
     });
 
@@ -150,7 +151,7 @@ describe('registerCustomerTools', () => {
       const client = makeClient();
       registerCustomerTools(server as never, client);
 
-      vi.mocked(client.request).mockResolvedValueOnce([]);
+      vi.mocked(client.requestList).mockResolvedValueOnce([]);
 
       const handler = getHandler(server, 'list_customers');
       await handler({
@@ -160,7 +161,7 @@ describe('registerCustomerTools', () => {
         created_at_max: '2024-01-31T23:59:59Z',
       });
 
-      const [, path] = vi.mocked(client.request).mock.calls[0] as [string, string];
+      const [, path] = vi.mocked(client.requestList).mock.calls[0] as [string, string];
       expect(path).toContain('created_at_min=');
       expect(path).toContain('created_at_max=');
     });
@@ -170,12 +171,12 @@ describe('registerCustomerTools', () => {
       const client = makeClient();
       registerCustomerTools(server as never, client);
 
-      vi.mocked(client.request).mockResolvedValueOnce([]);
+      vi.mocked(client.requestList).mockResolvedValueOnce([]);
 
       const handler = getHandler(server, 'list_customers');
       await handler({ page: 1, per_page: 20, since_id: 50 });
 
-      const [, path] = vi.mocked(client.request).mock.calls[0] as [string, string];
+      const [, path] = vi.mocked(client.requestList).mock.calls[0] as [string, string];
       expect(path).toContain('since_id=50');
     });
   });
