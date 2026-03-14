@@ -62,8 +62,8 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Marketing
 
-- [ ] **MKTG-01**: User can list coupons
-- [ ] **MKTG-02**: User can create a coupon
+- [x] **MKTG-01**: User can list coupons
+- [x] **MKTG-02**: User can create a coupon
 
 ### Store
 
@@ -157,8 +157,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | CUST-03 | Phase 3 | Pending |
 | CUST-04 | Phase 3 | Pending |
 | CUST-05 | Phase 3 | Pending |
-| MKTG-01 | Phase 3 | Pending |
-| MKTG-02 | Phase 3 | Pending |
+| MKTG-01 | Phase 3 | Complete |
+| MKTG-02 | Phase 3 | Complete |
 | INFR-01 | Phase 4 | Pending |
 | INFR-02 | Phase 4 | Pending |
 | INFR-03 | Phase 4 | Pending |

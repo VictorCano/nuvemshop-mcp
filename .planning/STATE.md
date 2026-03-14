@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 02-02 products plan
-last_updated: "2026-03-14T07:35:47.745Z"
+stopped_at: Completed 03-01 customer tools plan
+last_updated: "2026-03-14T07:53:45.560Z"
 last_activity: 2026-03-14 — Completed 01-02 NuvemshopClient plan
 progress:
   total_phases: 4
-  completed_phases: 2
-  total_plans: 7
-  completed_plans: 7
+  completed_phases: 3
+  total_plans: 9
+  completed_plans: 9
   percent: 67
 ---
 
@@ -55,6 +55,8 @@ Progress: [███████░░░] 67%
 | Phase 02-core-commerce-tools P04 | 2 | 1 tasks | 4 files |
 | Phase 02-core-commerce-tools P03 | 2 | 1 tasks | 4 files |
 | Phase 02-core-commerce-tools P02 | 3 min | 1 tasks | 4 files |
+| Phase 03-customer-and-marketing-tools P02 | 1 | 1 tasks | 4 files |
+| Phase 03-customer-and-marketing-tools P01 | 2 min | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -83,6 +85,10 @@ Recent decisions affecting current work:
 - [Phase 02-core-commerce-tools]: list_orders returns curated shape to reduce payload; close/reopen have no confirm guard since reversible
 - [Phase 02-core-commerce-tools]: list_products curates fields (id, flattened name, variant_count, price_range, sku) for AI-friendly summaries
 - [Phase 02-core-commerce-tools]: bulk_update_stock_price adds runtime 1-50 item validation in handler alongside Zod schema
+- [Phase 03-customer-and-marketing-tools]: create_coupon type/value guard returns toolResponse error for percentage/absolute types without value
+- [Phase 03-customer-and-marketing-tools]: coupon POST body uses Object.fromEntries+filter to omit undefined optional fields
+- [Phase 03-customer-and-marketing-tools]: delete_customer confirm guard fetches resource first, includes order constraint note in warning
+- [Phase 03-customer-and-marketing-tools]: create_customer body only includes defined optional fields (omit-undefined pattern)
 
 ### Pending Todos
 
@@ -95,6 +101,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-14T07:35:47.743Z
-Stopped at: Completed 02-02 products plan
+Last session: 2026-03-14T07:53:45.556Z
+Stopped at: Completed 03-01 customer tools plan
 Resume file: None
