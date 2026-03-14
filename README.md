@@ -75,9 +75,9 @@ Inicia na porta 3000 por padrão. Configurável com as variáveis de ambiente `M
 | `create_product`          | Cria um novo produto                            | ✅     |
 | `update_product`          | Atualiza um produto existente                   | ✅     |
 | `delete_product`          | Remove um produto                               | ✅     |
-| `create_variant`          | Adiciona uma variante a um produto              | 🔨     |
+| `create_variant`          | Adiciona uma variante a um produto              | ✅     |
 | `update_variant`          | Atualiza uma variante existente                 | ✅     |
-| `delete_variant`          | Remove uma variante                             | 🔲     |
+| `delete_variant`          | Remove uma variante                             | ✅     |
 | `bulk_update_stock_price` | Atualiza estoque e preço de múltiplas variantes | ✅     |
 
 ### Pedidos (5)
@@ -85,19 +85,19 @@ Inicia na porta 3000 por padrão. Configurável com as variáveis de ambiente `M
 | Ferramenta     | Descrição                           | Status |
 | -------------- | ----------------------------------- | ------ |
 | `list_orders`  | Lista pedidos com filtros opcionais | ✅     |
-| `get_order`    | Busca um pedido por ID              | 🔲     |
-| `close_order`  | Fecha um pedido                     | 🔲     |
-| `reopen_order` | Reabre um pedido fechado            | 🔲     |
-| `cancel_order` | Cancela um pedido                   | 🔲     |
+| `get_order`    | Busca um pedido por ID              | ✅     |
+| `close_order`  | Fecha um pedido                     | ✅     |
+| `reopen_order` | Reabre um pedido fechado            | ✅     |
+| `cancel_order` | Cancela um pedido                   | ✅     |
 
 ### Fulfillment (4)
 
 | Ferramenta                 | Descrição                                     | Status |
 | -------------------------- | --------------------------------------------- | ------ |
-| `list_fulfillment_orders`  | Lista ordens de fulfillment de um pedido      | 🔲     |
-| `get_fulfillment_order`    | Busca uma ordem de fulfillment por ID         | 🔲     |
-| `update_fulfillment_order` | Atualiza o status de uma ordem de fulfillment | 🔲     |
-| `add_tracking_event`       | Adiciona evento de rastreamento a uma ordem   | 🔲     |
+| `list_fulfillment_orders`  | Lista ordens de fulfillment de um pedido      | ✅     |
+| `get_fulfillment_order`    | Busca uma ordem de fulfillment por ID         | ✅     |
+| `update_fulfillment_order` | Atualiza o status de uma ordem de fulfillment | ✅     |
+| `add_tracking_event`       | Adiciona evento de rastreamento a uma ordem   | ✅     |
 
 ### Clientes (5)
 
