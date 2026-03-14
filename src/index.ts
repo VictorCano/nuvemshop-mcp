@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 import { NuvemshopClient } from './client.js';
 import { createServer, startHttp, startStdio } from './server.js';
+import { registerCouponTools } from './tools/coupons.js';
+import { registerCustomerTools } from './tools/customers.js';
 import { registerFulfillmentTools } from './tools/fulfillment.js';
 import { registerOrderTools } from './tools/orders.js';
 import { registerProductTools } from './tools/products.js';
@@ -30,6 +32,8 @@ registerStoreCategoryTools(server, client);
 registerProductTools(server, client);
 registerOrderTools(server, client);
 registerFulfillmentTools(server, client);
+registerCustomerTools(server, client);
+registerCouponTools(server, client);
 
 const useHttp = process.argv.includes('--http');
 
