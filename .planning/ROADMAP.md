@@ -65,8 +65,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 03-01-PLAN.md — Customer tools: list, get, create, update, delete with confirm guard (CUST-01..05)
-- [ ] 03-02-PLAN.md — Coupon tools: list with filters, create with type/value validation (MKTG-01..02)
+- [x] 03-01-PLAN.md — Customer tools: list, get, create, update, delete with confirm guard (CUST-01..05)
+- [x] 03-02-PLAN.md — Coupon tools: list with filters, create with type/value validation (MKTG-01..02)
 
 ### Phase 4: Release and CI/CD
 **Goal**: The package is published to npm and protected by automated CI checks that prevent broken or insecure releases
@@ -78,12 +78,12 @@ Plans:
   3. Merging to main triggers a GitHub Actions workflow that publishes a new semver version to npm via OIDC (no stored npm token in GitHub secrets)
   4. The README is written in Portuguese (Brazil) and includes a prominent AI-built disclaimer
   5. The develop branch exists and main contains only release commits (no direct development commits)
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 04-01: develop/main branch strategy, package.json files whitelist, README in Portuguese (BR) with AI disclaimer
-- [ ] 04-02: GitHub Actions PR checks workflow (lint, tests)
-- [ ] 04-03: GitHub Actions npm release workflow (OIDC publish on merge to main)
+- [ ] 04-01-PLAN.md — Package prep (files whitelist, repository field), Portuguese README, LICENSE, develop branch (INFR-01, INFR-02, INFR-03, INFR-06)
+- [ ] 04-02-PLAN.md — GitHub Actions CI workflow (PR checks) and release workflow (OIDC npm publish) (INFR-04, INFR-05)
+- [ ] 04-03-PLAN.md — Human checkpoint: first npm publish, OIDC Trusted Publishing config, branch protection (INFR-01, INFR-05, INFR-06)
 
 ## Progress
 
