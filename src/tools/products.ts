@@ -179,6 +179,16 @@ export function registerProductTools(server: McpServer, client: NuvemshopClient)
         .optional()
         .describe('Whether product is visible in store (default true)'),
       price: z.string().optional().describe('Base price as string, e.g. "29.99"'),
+      attributes: z.preprocess(
+        jsonPreprocess,
+        z
+          .array(z.record(z.unknown()))
+          .optional()
+          .describe(
+            'Product attributes for variants, e.g. [{"pt":"Tamanho"}]. ' +
+              'Required when creating a product with variant values.',
+          ),
+      ),
       variants: z.preprocess(
         jsonPreprocess,
         z
@@ -199,19 +209,22 @@ export function registerProductTools(server: McpServer, client: NuvemshopClient)
       ),
     },
     async (args) => {
-      const { name, description, published, price, variants, categories, images } = args as {
-        name: string;
-        description?: string;
-        published?: boolean;
-        price?: string;
-        variants?: Record<string, unknown>[];
-        categories?: number[];
-        images?: Record<string, unknown>[];
-      };
+      const { name, description, published, price, attributes, variants, categories, images } =
+        args as {
+          name: string;
+          description?: string;
+          published?: boolean;
+          price?: string;
+          attributes?: Record<string, unknown>[];
+          variants?: Record<string, unknown>[];
+          categories?: number[];
+          images?: Record<string, unknown>[];
+        };
       const body: Record<string, unknown> = { name };
       if (description !== undefined) body['description'] = description;
       if (published !== undefined) body['published'] = published;
       if (price !== undefined) body['price'] = price;
+      if (attributes !== undefined) body['attributes'] = attributes;
       if (variants !== undefined) body['variants'] = variants;
       if (categories !== undefined) body['categories'] = categories;
       if (images !== undefined) body['images'] = images;
@@ -312,6 +325,8 @@ export function registerProductTools(server: McpServer, client: NuvemshopClient)
   server.tool(
     'create_variant',
     'Create a new variant for an existing product. Price is required. ' +
+      'When adding a variant to a product that already has one, you MUST provide values ' +
+      'with attribute names to differentiate variants (e.g. [{"pt":"Azul"}] for color). ' +
       'Returns the created variant resource. Use get_product to see existing variants.',
     {
       product_id: z.string().describe('Product ID to add the variant to'),
