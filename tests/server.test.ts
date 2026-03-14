@@ -16,21 +16,19 @@ vi.mock('@modelcontextprotocol/sdk/server/stdio.js', () => {
 
 vi.mock('@modelcontextprotocol/sdk/server/streamableHttp.js', () => {
   const StreamableHTTPServerTransport = vi.fn().mockImplementation(() => ({
-    handleRequest: vi
-      .fn()
-      .mockImplementation(
-        (
-          _req: unknown,
-          res: {
-            writeHead: (s: number, h: Record<string, string>) => void;
-            end: (b: string) => void;
-          },
-        ) => {
-          res.writeHead(200, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ jsonrpc: '2.0', id: 1, result: { tools: [] } }));
-          return Promise.resolve();
+    handleRequest: vi.fn().mockImplementation(
+      (
+        _req: unknown,
+        res: {
+          writeHead: (s: number, h: Record<string, string>) => void;
+          end: (b: string) => void;
         },
-      ),
+      ) => {
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ jsonrpc: '2.0', id: 1, result: { tools: [] } }));
+        return Promise.resolve();
+      },
+    ),
   }));
   return { StreamableHTTPServerTransport };
 });

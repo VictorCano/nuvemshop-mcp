@@ -166,15 +166,23 @@ describe('registerStoreCategoryTools', () => {
       const client = makeClient();
       registerStoreCategoryTools(server as never, client);
 
+      const current = {
+        id: 5,
+        name: { pt: 'Original' },
+        description: { pt: 'Desc' },
+        parent_id: null,
+      };
       const updated = { id: 5, name: { pt: 'Atualizado' }, parent_id: null };
+      vi.mocked(client.get).mockResolvedValueOnce(current);
       vi.mocked(client.put).mockResolvedValueOnce(updated);
 
       const handler = getHandler(server, 'update_category');
       const result = await handler({ id: '5', name: 'Atualizado' });
 
+      expect(client.get).toHaveBeenCalledWith('/categories/5');
       expect(client.put).toHaveBeenCalledWith(
         '/categories/5',
-        expect.objectContaining({ name: 'Atualizado' }),
+        expect.objectContaining({ name: 'Atualizado', description: { pt: 'Desc' } }),
       );
       const parsed = JSON.parse(result.content[0].text);
       expect(parsed).toEqual(updated);

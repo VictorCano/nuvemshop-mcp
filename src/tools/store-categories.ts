@@ -136,10 +136,6 @@ export function registerStoreCategoryTools(server: McpServer, client: NuvemshopC
         description?: string;
         parent?: number;
       };
-      const body: Record<string, unknown> = {};
-      if (name !== undefined) body['name'] = name;
-      if (description !== undefined) body['description'] = description;
-      if (parent !== undefined) body['parent'] = parent;
       // Nuvemshop categories API only supports PUT (full replace).
       // Fetch current values and merge to avoid clearing unset fields.
       const current = await client.get<CategoryResource>(`/categories/${id}`);
