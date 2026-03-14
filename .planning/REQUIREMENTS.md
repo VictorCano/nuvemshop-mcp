@@ -54,11 +54,11 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Customers
 
-- [ ] **CUST-01**: User can list customers with filtering and pagination
-- [ ] **CUST-02**: User can get a customer by ID
-- [ ] **CUST-03**: User can create a customer
-- [ ] **CUST-04**: User can update a customer
-- [ ] **CUST-05**: User can delete a customer
+- [x] **CUST-01**: User can list customers with filtering and pagination
+- [x] **CUST-02**: User can get a customer by ID
+- [x] **CUST-03**: User can create a customer
+- [x] **CUST-04**: User can update a customer
+- [x] **CUST-05**: User can delete a customer
 
 ### Marketing
 
@@ -71,12 +71,12 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Infrastructure
 
-- [ ] **INFR-01**: npm package published as `nuvemshop-mcp` with semver starting at 0.0.1
-- [ ] **INFR-02**: README in Portuguese (Brazil) with AI-built disclaimer
-- [ ] **INFR-03**: Husky pre-commit hooks running tests and detect-secrets
-- [ ] **INFR-04**: GitHub Actions workflow for PR checks (lint, tests)
-- [ ] **INFR-05**: GitHub Actions workflow for npm release on merge to main
-- [ ] **INFR-06**: develop/main branch strategy (no master branch)
+- [x] **INFR-01**: npm package published as `nuvemshop-mcp` with semver starting at 0.0.1
+- [x] **INFR-02**: README in Portuguese (Brazil) with AI-built disclaimer
+- [x] **INFR-03**: Husky pre-commit hooks running tests and detect-secrets
+- [x] **INFR-04**: GitHub Actions workflow for PR checks (lint, tests)
+- [x] **INFR-05**: GitHub Actions workflow for npm release on merge to main
+- [x] **INFR-06**: develop/main branch strategy (no master branch)
 
 ## v2 Requirements
 
@@ -152,19 +152,19 @@ Which phases cover which requirements. Updated during roadmap creation.
 | FULF-03 | Phase 2 | Complete |
 | FULF-04 | Phase 2 | Complete |
 | STOR-01 | Phase 2 | Complete |
-| CUST-01 | Phase 3 | Pending |
-| CUST-02 | Phase 3 | Pending |
-| CUST-03 | Phase 3 | Pending |
-| CUST-04 | Phase 3 | Pending |
-| CUST-05 | Phase 3 | Pending |
+| CUST-01 | Phase 3 | Complete |
+| CUST-02 | Phase 3 | Complete |
+| CUST-03 | Phase 3 | Complete |
+| CUST-04 | Phase 3 | Complete |
+| CUST-05 | Phase 3 | Complete |
 | MKTG-01 | Phase 3 | Complete |
 | MKTG-02 | Phase 3 | Complete |
-| INFR-01 | Phase 4 | Pending |
-| INFR-02 | Phase 4 | Pending |
-| INFR-03 | Phase 4 | Pending |
-| INFR-04 | Phase 4 | Pending |
-| INFR-05 | Phase 4 | Pending |
-| INFR-06 | Phase 4 | Pending |
+| INFR-01 | Phase 4 | Complete |
+| INFR-02 | Phase 4 | Complete |
+| INFR-03 | Phase 4 | Complete |
+| INFR-04 | Phase 4 | Complete |
+| INFR-05 | Phase 4 | Complete |
+| INFR-06 | Phase 4 | Complete |
 
 **Coverage:**
 - v1 requirements: 38 total

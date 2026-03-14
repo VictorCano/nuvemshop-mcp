@@ -15,7 +15,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 1: Foundation** - Secure MCP skeleton with auth, dual transports, error handling, and dev tooling (completed 2026-03-14)
 - [x] **Phase 2: Core Commerce Tools** - Product, category, order, fulfillment, and store tools (completed 2026-03-14)
 - [x] **Phase 3: Customer and Marketing Tools** - Customer CRUD and coupon tools (completed 2026-03-14)
-- [ ] **Phase 4: Release and CI/CD** - npm package, GitHub Actions, and Portuguese README
+- [x] **Phase 4: Release and CI/CD** - npm package, GitHub Actions, and Portuguese README (completed 2026-03-14)
 
 ## Phase Details
 
@@ -95,4 +95,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | 1. Foundation | 3/3 | Complete   | 2026-03-14 |
 | 2. Core Commerce Tools | 4/4 | Complete   | 2026-03-14 |
 | 3. Customer and Marketing Tools | 2/2 | Complete   | 2026-03-14 |
-| 4. Release and CI/CD | 0/3 | Not started | - |
+| 4. Release and CI/CD | 3/3 | Complete   | 2026-03-14 |

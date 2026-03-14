@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 03-01 customer tools plan
-last_updated: "2026-03-14T07:53:45.560Z"
+stopped_at: Completed 04-03-PLAN.md (platform configuration)
+last_updated: "2026-03-14T08:52:00.857Z"
 last_activity: 2026-03-14 — Completed 01-02 NuvemshopClient plan
 progress:
   total_phases: 4
-  completed_phases: 3
-  total_plans: 9
-  completed_plans: 9
+  completed_phases: 4
+  total_plans: 12
+  completed_plans: 12
   percent: 67
 ---
 
@@ -57,6 +57,8 @@ Progress: [███████░░░] 67%
 | Phase 02-core-commerce-tools P02 | 3 min | 1 tasks | 4 files |
 | Phase 03-customer-and-marketing-tools P02 | 1 | 1 tasks | 4 files |
 | Phase 03-customer-and-marketing-tools P01 | 2 min | 2 tasks | 4 files |
+| Phase 04-release-and-ci-cd P02 | 1 | 1 tasks | 2 files |
+| Phase 04-release-and-ci-cd P04-01 | 8min | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -89,6 +91,13 @@ Recent decisions affecting current work:
 - [Phase 03-customer-and-marketing-tools]: coupon POST body uses Object.fromEntries+filter to omit undefined optional fields
 - [Phase 03-customer-and-marketing-tools]: delete_customer confirm guard fetches resource first, includes order constraint note in warning
 - [Phase 03-customer-and-marketing-tools]: create_customer body only includes defined optional fields (omit-undefined pattern)
+- [Phase 04-release-and-ci-cd]: release.yml uses OIDC Trusted Publishing (id-token: write, environment: npm) with Node 22.x and explicit npm upgrade for >=11.5.1 requirement
+- [Phase 04-release-and-ci-cd]: ci.yml job named 'check' produces status checks 'check (18.x)' / 'check (20.x)' / 'check (22.x)' for branch protection configuration
+- [Phase 04-release-and-ci-cd]: npm files whitelist explicit array excludes src/tests/.planning/ from tarball
+- [Phase 04-release-and-ci-cd]: develop/main branch strategy: develop for active dev, main triggers npm publish
+- [Phase 04-release-and-ci-cd]: pre-commit hook executable bit fixed (chmod +x) — was present but not executable
+- [Phase 04-release-and-ci-cd]: OIDC bootstrap solved by manual first publish: granular token used for 0.0.1, then deleted; all future publishes via OIDC with no long-lived tokens
+- [Phase 04-release-and-ci-cd]: GitHub environment named npm gates the release.yml OIDC flow; no secrets or protection rules needed
 
 ### Pending Todos
 
@@ -101,6 +110,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-14T07:53:45.556Z
-Stopped at: Completed 03-01 customer tools plan
+Last session: 2026-03-14T08:51:56.781Z
+Stopped at: Completed 04-03-PLAN.md (platform configuration)
 Resume file: None
