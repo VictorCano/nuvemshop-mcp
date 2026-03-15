@@ -124,7 +124,7 @@ export function registerOrderTools(server: McpServer, client: NuvemshopClient): 
         customer_id,
       });
 
-      const raw = await client.request<OrderResource[]>('GET', `/orders${qs}`);
+      const raw = await client.requestList<OrderResource>('GET', `/orders${qs}`);
       const items = raw.map((order) => ({
         id: order.id,
         number: order.number,

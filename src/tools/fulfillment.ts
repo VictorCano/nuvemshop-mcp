@@ -31,12 +31,12 @@ export function registerFulfillmentTools(server: McpServer, client: NuvemshopCli
       'Use list_fulfillment_orders to find fulfillment order IDs for a given order.',
     {
       order_id: z.number().int().describe('The order ID'),
-      fulfillment_order_id: z.number().int().describe('The fulfillment order ID'),
+      fulfillment_order_id: z.string().describe('The fulfillment order ID'),
     },
     async (args) => {
       const { order_id, fulfillment_order_id } = args as {
         order_id: number;
-        fulfillment_order_id: number;
+        fulfillment_order_id: string;
       };
       const data = await client.get(
         `/orders/${order_id}/fulfillment-orders/${fulfillment_order_id}`,
@@ -56,7 +56,7 @@ export function registerFulfillmentTools(server: McpServer, client: NuvemshopCli
       'as it provides richer tracking history for the customer.',
     {
       order_id: z.number().int().describe('The order ID'),
-      fulfillment_order_id: z.number().int().describe('The fulfillment order ID to update'),
+      fulfillment_order_id: z.string().describe('The fulfillment order ID to update'),
       status: z
         .enum(['UNPACKED', 'PACKED', 'DISPATCHED', 'DELIVERED', 'READY_FOR_PICKUP'])
         .describe(
@@ -68,7 +68,7 @@ export function registerFulfillmentTools(server: McpServer, client: NuvemshopCli
     async (args) => {
       const { order_id, fulfillment_order_id, status } = args as {
         order_id: number;
-        fulfillment_order_id: number;
+        fulfillment_order_id: string;
         status: 'UNPACKED' | 'PACKED' | 'DISPATCHED' | 'DELIVERED' | 'READY_FOR_PICKUP';
       };
       const data = await client.request(
@@ -91,7 +91,7 @@ export function registerFulfillmentTools(server: McpServer, client: NuvemshopCli
       'Common statuses: "in_transit", "delivered", "out_for_delivery", "attempt_failed", "ready_for_pickup".',
     {
       order_id: z.number().int().describe('The order ID'),
-      fulfillment_order_id: z.number().int().describe('The fulfillment order ID'),
+      fulfillment_order_id: z.string().describe('The fulfillment order ID'),
       status: z
         .string()
         .describe(
@@ -104,6 +104,7 @@ export function registerFulfillmentTools(server: McpServer, client: NuvemshopCli
         .describe(
           'Human-readable description of the tracking event, e.g. "Package picked up at warehouse"',
         ),
+      address: z.string().optional().describe('Address where the event occurred'),
       city: z.string().optional().describe('City where the event occurred'),
       province: z.string().optional().describe('Province or state where the event occurred'),
       country: z.string().optional().describe('Country code where the event occurred (e.g. "BR")'),
@@ -120,15 +121,17 @@ export function registerFulfillmentTools(server: McpServer, client: NuvemshopCli
         fulfillment_order_id,
         status,
         description,
+        address,
         city,
         province,
         country,
         happened_at,
       } = args as {
         order_id: number;
-        fulfillment_order_id: number;
+        fulfillment_order_id: string;
         status: string;
         description?: string;
+        address?: string;
         city?: string;
         province?: string;
         country?: string;
@@ -137,6 +140,7 @@ export function registerFulfillmentTools(server: McpServer, client: NuvemshopCli
 
       const body: Record<string, unknown> = { status };
       if (description !== undefined) body['description'] = description;
+      if (address !== undefined) body['address'] = address;
       if (city !== undefined) body['city'] = city;
       if (province !== undefined) body['province'] = province;
       if (country !== undefined) body['country'] = country;

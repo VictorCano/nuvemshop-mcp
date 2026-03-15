@@ -1,5 +1,9 @@
 .planning/
+.mcp.json
 dev/
 node_modules/
 dist/
 *.js.map
+.env
+.history
+.secrets.baseline

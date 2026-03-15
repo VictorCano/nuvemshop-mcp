@@ -21,6 +21,7 @@ function makeClient(): NuvemshopClient {
     put: vi.fn(),
     del: vi.fn(),
     request: vi.fn(),
+    requestList: vi.fn(),
     list: vi.fn(),
   } as unknown as NuvemshopClient;
 }
@@ -57,7 +58,7 @@ describe('registerProductTools', () => {
   });
 
   describe('list_products', () => {
-    it('calls client.request with GET and correct path including query params', async () => {
+    it('calls client.requestList with GET and correct path including query params', async () => {
       const server = makeServer();
       const client = makeClient();
       registerProductTools(server as never, client);
@@ -71,12 +72,12 @@ describe('registerProductTools', () => {
           updated_at: '2024-01-01T00:00:00Z',
         },
       ];
-      vi.mocked(client.request).mockResolvedValueOnce(products);
+      vi.mocked(client.requestList).mockResolvedValueOnce(products);
 
       const handler = getHandler(server, 'list_products');
       const result = await handler({ page: 1, per_page: 20 });
 
-      expect(client.request).toHaveBeenCalledWith('GET', expect.stringContaining('/products'));
+      expect(client.requestList).toHaveBeenCalledWith('GET', expect.stringContaining('/products'));
       const parsed = JSON.parse(result.content[0].text);
       expect(parsed.pagination.page).toBe(1);
       expect(parsed.pagination.per_page).toBe(20);
@@ -101,7 +102,7 @@ describe('registerProductTools', () => {
           some_extra_field: 'should be excluded',
         },
       ];
-      vi.mocked(client.request).mockResolvedValueOnce(products);
+      vi.mocked(client.requestList).mockResolvedValueOnce(products);
 
       const handler = getHandler(server, 'list_products');
       const result = await handler({ page: 1, per_page: 20 });
@@ -124,12 +125,12 @@ describe('registerProductTools', () => {
       const client = makeClient();
       registerProductTools(server as never, client);
 
-      vi.mocked(client.request).mockResolvedValueOnce([]);
+      vi.mocked(client.requestList).mockResolvedValueOnce([]);
 
       const handler = getHandler(server, 'list_products');
       await handler({ page: 1, per_page: 20, q: 'camiseta', category_id: 5 });
 
-      const [, path] = vi.mocked(client.request).mock.calls[0] as [string, string];
+      const [, path] = vi.mocked(client.requestList).mock.calls[0] as [string, string];
       expect(path).toContain('q=camiseta');
       expect(path).toContain('category_id=5');
     });
